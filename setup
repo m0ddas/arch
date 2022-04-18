@@ -17,6 +17,9 @@ mount /dev/nvme1n1p1 /boot
 mkdir /mnt/home
 mount /dev/nvme1n1p4 /mnt/home
 
+# Adding to pacman.conf
+echo "ParallelDownloads = 10" | tee -a /etc/pacman.conf
+
 # Installing base system
 pacstrap /mnt base base-devel linux linux-firmware nano
 
