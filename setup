@@ -11,7 +11,7 @@ mount /dev/nvme1n1p3 /mnt
 
 # Setting up boot folder
 mkdir /mnt/boot
-mount /dev/nvme1n1p1 /boot
+mount /dev/nvme1n1p1 /mnt/boot
 
 # Creating home directory
 mkdir /mnt/home
