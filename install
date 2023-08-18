@@ -1,0 +1,4 @@
+#/bin/bash
+
+ln -sf /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
+hwclock --systohc
