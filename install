@@ -29,7 +29,7 @@ pacman -S --noconfirm efibootmgr
 
 bootctl --path=/boot install
 
-touch /boot/loader
+touch /boot/loader/entries/arch.conf
 echo "title Arch Linux" | tee -a /boot/loader/entries/arch.conf >/dev/null
 echo "linux vmlinuz-linux" | tee -a /boot/loader/entries/arch.conf >/dev/null
 echo "initrd initramfs-linux.img" | tee -a /boot/loader/entries/arch.conf >/dev/null
