@@ -25,7 +25,7 @@ echo "127.0.1.1  arch-desktop" /etc/hosts
 
 # Installing and Configuring Boot Manager
 
-pacman -S efibootmgr
+pacman -S --noconfirm efibootmgr
 
 bootctl --path=/boot install
 
@@ -53,11 +53,23 @@ nano /etc/pacman.conf
 
 # Desktop Environment
 
-pacman -S gdm gnome gnome-terminal networkmanager 
+#pacman -S --noconfirm gdm gnome gnome-terminal networkmanager firefox
+
+# Applications
+
+#pacman -S --noconfirm steam lutris wine wine-mono wine-gecko spotify-launcher fish fuse
+
+# Office
+
+#pacman -S --noconfirm libreoffice-fresh-sv
 
 # AMD GPU Drivers
 
-pacman -S mesa lib32-mesa libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau vulkan-radeon lib32-vulkan-radeon 
+#pacman -S --noconfirm mesa lib32-mesa libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau vulkan-radeon lib32-vulkan-radeon 
+
+# All in one
+
+#pacman -S --noconfirm gdm gnome gnome-terminal networkmanager firefox steam lutris wine wine-mono wine-gecko spotify-launcher fish fuse libreoffice-fresh-sv mesa lib32-mesa libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau vulkan-radeon lib32-vulkan-radeon 
 
 systemctl enable NetworkManager
 systemctl enable gdm
