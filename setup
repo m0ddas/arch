@@ -1,0 +1,22 @@
+cfidisk /dev/nvme01n1
+
+mkfs.vfat -F32 /dev/nvme0n1p1
+mkswap /dev/nvme0n1p2
+mkfs.ext4 /dev/nvme0n1p3
+mkfs.ext4 /dev/nvme0n1p4
+
+mount /dev/nvme0n1p3 /mnt
+mkdir /mnt/boot
+mkdir /mnt/home
+
+mount /dev/nvme0n1p1 /mnt/boot
+mount /dev/nvme0n1p4 /mnt/home
+
+nano /etc/pacman.conf
+pacman -Sy
+
+pacstrap -K /mnt base base-devel linux linux-firmware nano
+
+genfstab -U /mnt >> /mnt/etc/fstab
+
+arch-chroot /mnt
