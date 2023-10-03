@@ -1,4 +1,63 @@
 #!/bin/bash
 
+# Setting up timezone and clock
+
 ln -sf /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
 hwclock --systohc
+
+# Language
+
+nano /etc/locale.gen
+locale-gen
+
+# Setting up keymap and terminal font
+
+echo "KEYMAP=sv-latin1" | tee -a /etc/vconsole.conf >/dev/null
+echo "FONT=ter-124n" | tee -a /etc/vconsole.conf >/dev/null
+
+# Setting up Hostname and Network
+
+echo "arch-desktop" | tee -a /etc/hostname >/dev/null
+
+echo "127.0.0.1  localhost" /etc/hosts
+echo "::  localhost" /etc/hosts
+echo "127.0.1.1  arch-desktop" /etc/hosts
+
+# Installing and Configuring Boot Manager
+
+pacman -S efibootmgr
+
+bootctl --path=/boot install
+
+touch /boot/loader
+echo "title Arch Linux" | tee -a /boot/loader/entries/arch.conf >/dev/null
+echo "linux vmlinuz-linux" | tee -a /boot/loader/entries/arch.conf >/dev/null
+echo "initrd initramfs-linux.img" | tee -a /boot/loader/entries/arch.conf >/dev/null
+echo "options" | tee -a /boot/loader/entries/arch.conf >/dev/null
+blkid | tee -a /boot/loader/entries/arch.conf >/dev/null
+echo "rw splash lsm=landlock,lockdown,yama,integrity,apparmor,bpf" | tee -a /boot/loader/entries/arch.conf >/dev/null
+
+echo "default arch" > /boot/loader/loader.conf
+
+nano /boot/loaders/entries/arch.conf
+
+# Adding users and setting passwords
+
+passwd
+useradd -m -G wheel modda
+passwd modda
+
+# Manually configure pacman and setting up pacman.conf
+
+nano /etc/pacman.conf
+
+# Desktop Environment
+
+pacman -S gdm gnome gnome-terminal networkmanager 
+
+# AMD GPU Drivers
+
+pacman -S mesa lib32-mesa libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau vulkan-radeon lib32-vulkan-radeon 
+
+systemctl enable NetworkManager
+systemctl enable gdm
