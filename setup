@@ -1,22 +1,30 @@
-cfidisk /dev/nvme01n1
+# Updating pacman
+pacman -Sy
 
+# Start partitioning with cfdisk
+cfidisk /dev/nvme0n1
+
+# Creating filesystems
 mkfs.vfat -F32 /dev/nvme0n1p1
 mkswap /dev/nvme0n1p2
 mkfs.ext4 /dev/nvme0n1p3
 mkfs.ext4 /dev/nvme0n1p4
 
+# Mounting partitions and creating folders
 mount /dev/nvme0n1p3 /mnt
 mkdir /mnt/boot
 mkdir /mnt/home
-
 mount /dev/nvme0n1p1 /mnt/boot
 mount /dev/nvme0n1p4 /mnt/home
 
+# Edit pacman configuration
 nano /etc/pacman.conf
-pacman -Sy
 
+# Installing Arch Base
 pacstrap -K /mnt base base-devel linux linux-firmware nano
 
+# Generating fstab file on new environment
 genfstab -U /mnt >> /mnt/etc/fstab
 
+# Chroot into new environment
 arch-chroot /mnt
