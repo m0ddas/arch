@@ -1,22 +1,18 @@
 #!/bin/bash
 
 # Setting up timezone and clock
-
 ln -sf /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
 hwclock --systohc
 
 # Language
-
 nano /etc/locale.gen
 locale-gen
 
 # Setting up keymap and terminal font
-
 echo "KEYMAP=sv-latin1" | tee -a /etc/vconsole.conf >/dev/null
 echo "FONT=ter-124n" | tee -a /etc/vconsole.conf >/dev/null
 
 # Setting up Hostname and Network
-
 echo "arch-desktop" | tee -a /etc/hostname >/dev/null
 
 echo "127.0.0.1  localhost" /etc/hosts
@@ -24,7 +20,6 @@ echo "::  localhost" /etc/hosts
 echo "127.0.1.1  arch-desktop" /etc/hosts
 
 # Installing and Configuring Boot Manager
-
 pacman -S --noconfirm efibootmgr
 
 bootctl --path=/boot install
@@ -42,33 +37,26 @@ echo "default arch" > /boot/loader/loader.conf
 nano /boot/loaders/entries/arch.conf
 
 # Adding users and setting passwords
-
 passwd
 useradd -m -G wheel modda
 passwd modda
 
 # Manually configure pacman and setting up pacman.conf
-
 nano /etc/pacman.conf
 
 # Desktop Environment
-
 #pacman -S --noconfirm gdm gnome gnome-terminal networkmanager firefox
 
 # Applications
-
 #pacman -S --noconfirm steam lutris wine wine-mono wine-gecko spotify-launcher fish fuse
 
 # Office
-
 #pacman -S --noconfirm libreoffice-fresh-sv
 
 # AMD GPU Drivers
-
 #pacman -S --noconfirm mesa lib32-mesa libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau vulkan-radeon lib32-vulkan-radeon 
 
 # All in one
-
 #pacman -S --noconfirm gdm gnome gnome-terminal networkmanager firefox steam lutris wine wine-mono wine-gecko spotify-launcher fish fuse libreoffice-fresh-sv mesa lib32-mesa libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau vulkan-radeon lib32-vulkan-radeon 
 
 systemctl enable NetworkManager
