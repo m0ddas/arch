@@ -28,9 +28,7 @@ touch /boot/loader/entries/arch.conf
 echo "title Arch Linux" | tee -a /boot/loader/entries/arch.conf >/dev/null
 echo "linux vmlinuz-linux" | tee -a /boot/loader/entries/arch.conf >/dev/null
 echo "initrd initramfs-linux.img" | tee -a /boot/loader/entries/arch.conf >/dev/null
-echo "options" | tee -a /boot/loader/entries/arch.conf >/dev/null
-blkid | tee -a /boot/loader/entries/arch.conf >/dev/null
-echo "rw splash lsm=landlock,lockdown,yama,integrity,apparmor,bpf" | tee -a /boot/loader/entries/arch.conf >/dev/null
+echo "options root=$(blkid | grep '/dev/nvme1n1p3' | cut -d' ' -f4 | sed 's/"//g') rw splash lsm=landlock,lockdown,yama,integrity,apparmor,bpf"
 
 echo "default arch" > /boot/loader/loader.conf
 
@@ -43,6 +41,10 @@ passwd modda
 
 # Manually configure pacman and setting up pacman.conf
 nano /etc/pacman.conf
+sed -i 's/^#ParallelDow/hello/' /path/to/config/file
+sed -i 's/^#hello/hello/' /path/to/config/file
+sed -i 's/^#hello/hello/' /path/to/config/file
+sed -i 's/^#hello/hello/' /path/to/config/file
 
 # Desktop Environment
 #pacman -S --noconfirm gdm gnome gnome-terminal networkmanager firefox
