@@ -41,9 +41,9 @@ passwd modda
 
 # Manually configure pacman and setting up pacman.conf
 nano /etc/pacman.conf
-sed -i 's/^#ParallelDow/hello/' /path/to/config/file
-sed -i 's/^#hello/hello/' /path/to/config/file
-sed -i 's/^#hello/hello/' /path/to/config/file
+sed -i 's/^#ParallelDownloads = 5/ParsllelDownloads = 10/' /etc/pacman.conf
+sed -i 's/^#Color/Color/' /etc/pacman.conf
+sed -i 's/^#[multilib]/[multilib]/' /path/to/config/file
 sed -i 's/^#hello/hello/' /path/to/config/file
 
 # Desktop Environment
