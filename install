@@ -5,10 +5,9 @@ ln -sf /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
 hwclock --systohc
 
 # Language
+touch /etc/locale.conf
 sed -i 's/^#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
 sed -i 's/^#sv_SE.UTF-8 UTF-8/sv_SE.UTF-8 UTF-8/' /etc/locale.gen
-#echo "en_US.UTF-8 UTF-8" | tee -a /etc/locale.gen >/dev/null
-#echo "sv_SE.UTF-8 UTF-8" | tee -a /etc/locale.gen >/dev/null
 locale-gen
 
 echo "LANG=C.UTF-8" | tee -a /etc/locale.conf >/dev/null
@@ -19,21 +18,22 @@ echo "LC_PAPER=sv_SE.UTF-8" | tee -a /etc/locale.conf >/dev/null
 echo "LC_MEASUREMENT=sv_SE.UTF-8" | tee -a /etc/locale.conf >/dev/null
 
 # Setting up keymap and terminal font
+touch /etc/vconsole.conf
 echo "KEYMAP=sv-latin1" | tee -a /etc/vconsole.conf >/dev/null
 echo "FONT=ter-124n" | tee -a /etc/vconsole.conf >/dev/null
 
 # Setting up Hostname and Network
+touch /etc/hostname
 echo "arch-desktop" | tee -a /etc/hostname >/dev/null
 
-echo "127.0.0.1  localhost" /etc/hosts
-echo "::  localhost" /etc/hosts
-echo "127.0.1.1  arch-desktop" /etc/hosts
+echo "127.0.0.1  localhost" | tee -a /etc/hosts >/dev/null
+echo "::  localhost" | tee -a /etc/hosts >/dev/null
+echo "127.0.1.1  arch-desktop" | tee -a /etc/hosts >/dev/null
 
 # Configuring /etc/pacman.conf
 sed -i 's/^#Color/Color/' /etc/pacman.conf
 sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 10/' /etc/pacman.conf
-sed -i 's/^#[multilib]/[multilib]/' /etc/pacman.conf
-sed -i 's|^#Include = /etc/pacman.d/mirrorlist|Include = /etc/pacman.d/mirrorlist|' /etc/pacman.conf
+nano /etc/pacman.conf
 
 # Installing and Configuring Boot Manager
 pacman -S --noconfirm efibootmgr
@@ -45,14 +45,9 @@ echo "title Arch Linux" | tee -a /boot/loader/entries/arch.conf >/dev/null
 echo "linux vmlinuz-linux" | tee -a /boot/loader/entries/arch.conf >/dev/null
 echo "initrd initramfs-linux.img" | tee -a /boot/loader/entries/arch.conf >/dev/null
 echo "options" | tee -a /boot/loader/entries/arch.conf >/dev/null
-echo "options root=$(blkid | grep '/dev/nvme1n1p3' | cut -d' ' -f2 | sed 's/"//g') rw splash lsm=landlock,lockdown,yama,integrity,apparmor,bpf" | tee -a /boot/loader/entries/arch.conf >/dev/null
-#blkid | tee -a /boot/loader/entries/arch.conf >/dev/null
-#echo "rw splash lsm=landlock,lockdown,yama,integrity,apparmor,bpf" | tee -a /boot/loader/entries/arch.conf >/dev/null
+echo "options root=$(blkid | grep '/dev/nvme0n1p3' | cut -d' ' -f5 | sed 's/"//g') rw splash lsm=landlock,lockdown,yama,integrity,apparmor,bpf" | tee -a /boot/loader/entries/arch.conf >/dev/null
 
 echo "default arch" > /boot/loader/loader.conf
-
-nano /boot/loader/entries/arch.conf
-nano /boot/loader/loader.conf
 
 # Adding users and setting passwords
 passwd
@@ -72,7 +67,7 @@ passwd modda
 #pacman -S --noconfirm mesa lib32-mesa libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau vulkan-radeon lib32-vulkan-radeon 
 
 # All in one
-#pacman -S --noconfirm 
+#pacman -S --noconfirm gdm gnome gnome-terminal networkmanager firefox steam lutris wine wine-mono wine-gecko spotify-launcher fish fuse vlc flatpak snapd libreoffice-fresh-sv mesa lib32-mesa libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau vulkan-radeon lib32-vulkan-radeon
 
 systemctl enable NetworkManager
 systemctl enable gdm
