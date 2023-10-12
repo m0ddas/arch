@@ -1,12 +1,18 @@
 # Updating pacman
 pacman -Sy
 
-# Start partitioning with cfdisk
-cfidisk /dev/nvme0n1
+# Start partitioning with parted
+#parted -s /dev/nvme0n1 mklabel gpt \
+#mkpart primary fat32 1MiB 2GiB \
+#set 1 esp on \
+#mkpart primary linux-swap 2GiB 20GiB
+#mkpart primary 20GiB 70GiB \
+#mkpart primary 70GiB 100%
 
 # Creating filesystems
 mkfs.vfat -F32 /dev/nvme0n1p1
 mkswap /dev/nvme0n1p2
+swapon /dev/nvme0n1p2
 mkfs.ext4 /dev/nvme0n1p3
 mkfs.ext4 /dev/nvme0n1p4
 
