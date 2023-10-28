@@ -70,7 +70,7 @@ echo "root:$(cat password_hash.txt)" | sudo chpasswd -e
 #pacman -S --noconfirm mesa lib32-mesa libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau vulkan-radeon lib32-vulkan-radeon 
 
 # All in one
-#pacman -S --noconfirm gdm gnome gnome-terminal networkmanager firefox steam lutris wine wine-mono wine-gecko spotify-launcher fish fuse vlc flatpak snapd libreoffice-fresh-sv mesa lib32-mesa libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau vulkan-radeon lib32-vulkan-radeon
+pacman -S --noconfirm gdm gnome gnome-terminal networkmanager firefox steam lutris wine wine-mono wine-gecko spotify-launcher fish fuse vlc flatpak snapd libreoffice-fresh-sv mesa lib32-mesa libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau vulkan-radeon lib32-vulkan-radeon
 
 systemctl enable NetworkManager
 systemctl enable gdm
