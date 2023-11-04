@@ -39,6 +39,7 @@ echo "127.0.1.1  arch-desktop" | tee -a /etc/hosts >/dev/null
 sed -i 's/^#Color/Color/' /etc/pacman.conf
 sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 10/' /etc/pacman.conf
 nano /etc/pacman.conf
+pacman -Syy >/dev/null
 
 # Installing and Configuring Boot Manager
 pacman -S --noconfirm efibootmgr
@@ -56,6 +57,7 @@ echo "options root=$(blkid | grep '/dev/nvme0n1p3' | cut -d' ' -f5 | sed 's/"//g
 useradd -m -G wheel modda
 echo "modda:$(cat password_hash.txt)" | sudo chpasswd -e
 echo "root:$(cat password_hash.txt)" | sudo chpasswd -e
+sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL'
 
 # Desktop Environment
 #pacman -S --noconfirm gdm gnome gnome-terminal networkmanager firefox
