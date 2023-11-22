@@ -3,8 +3,8 @@
 #parted -s /dev/nvme0n1 mklabel gpt
 #parted /dev/nvme0n1 mkpart primary fat32 1MiB 2GiB set 1 esp on
 #parted /dev/nvme0n1 mkpart primary linux-swap 2GiB 20GiB
-#parted /dev/nvme0n1 mkpart primary 20GiB 80GiB
-#parted /dev/nvme0n1 mkpart primary 80GiB 100%
+#parted /dev/nvme0n1 mkpart primary 20GiB 100GiB
+#parted /dev/nvme0n1 mkpart primary 100GiB 100%
 
 # Creating filesystems
 mkfs.vfat -F32 /dev/nvme0n1p1
