@@ -17,7 +17,7 @@ mkfs.ext4 -F /dev/nvme0n1p3
 mount /dev/nvme0n1p3 /mnt
 mkdir /mnt/boot
 mkdir /mnt/home
-mount /dev/nvme0n1p1 /mnt/boot
+mount -o uid=0,gid=0,fmask=0077,dmask=0077 /dev/nvme0n1p1 /mnt/boot
 mount /dev/nvme0n1p4 /mnt/home
 
 # Edit pacman configuration
