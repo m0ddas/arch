@@ -59,8 +59,11 @@ echo "modda:$(cat password_hash.txt)" | sudo chpasswd -e
 echo "root:$(cat password_hash.txt)" | sudo chpasswd -e
 EDITOR=nano visudo
 
-# Desktop Environment
+# Gnome Desktop Environment
 #pacman -S --noconfirm gdm gnome gnome-terminal networkmanager firefox
+
+# Kde Desktop Environment
+#pacman -S --noconfirm sddm plasma konsole partitionmanager
 
 # Applications
 #pacman -S --noconfirm spotify-launcher fish fuse vlc flatpak
