@@ -24,7 +24,7 @@ echo "LC_MEASUREMENT=sv_SE.UTF-8" | tee -a /etc/locale.conf >/dev/null
 
 # Setting up keymap and terminal font
 touch /etc/vconsole.conf
-echo "KEYMAP=sv-lat6" | tee -a /etc/vconsole.conf >/dev/null
+echo "KEYMAP=sv-latin1" | tee -a /etc/vconsole.conf >/dev/null
 echo "FONT=ter-124n" | tee -a /etc/vconsole.conf >/dev/null
 
 # Setting up Hostname and Network
@@ -57,7 +57,7 @@ echo "options root=$(blkid | grep '/dev/nvme0n1p3' | cut -d' ' -f5 | sed 's/"//g
 useradd -m -G wheel modda
 echo "modda:$(cat password_hash.txt)" | sudo chpasswd -e
 echo "root:$(cat password_hash.txt)" | sudo chpasswd -e
-sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL'
+EDITOR=nano visudo
 
 # Desktop Environment
 #pacman -S --noconfirm gdm gnome gnome-terminal networkmanager firefox
