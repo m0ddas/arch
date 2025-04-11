@@ -1,6 +1,5 @@
 gdm
 gnome
-gnome-terminal
 networkmanager
 firefox
 spotify-launcher
@@ -70,3 +69,4 @@ amdgpu_top
 ccache
 amd-ucode
 ninja
+terminus-font
