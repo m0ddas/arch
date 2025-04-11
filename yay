@@ -3,4 +3,4 @@ sudo git clone https://aur.archlinux.org/yay-git.git
 chown -R modda:modda yay-git/
 cd yay-git
 makepkg-si
-yay -S aic94xx-firmware ast-firmware linux-firmware-qlogic wd719x-firmware upd72020x-fw snapd yaru-icon-theme yaru-sound-theme yaru-gnome-shell-theme gnome-terminal-transparency
+yay -S snapd yaru-icon-theme yaru-sound-theme yaru-gnome-shell-theme gnome-terminal-transparency #aic94xx-firmware ast-firmware linux-firmware-qlogic wd719x-firmware upd72020x-fw
