@@ -70,3 +70,5 @@ ccache
 amd-ucode
 ninja
 terminus-font
+ttf-ubuntu-font-family
+bash-completion
