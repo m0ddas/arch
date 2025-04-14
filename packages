@@ -71,4 +71,6 @@ amd-ucode
 ninja
 terminus-font
 ttf-ubuntu-font-family
+starship
 bash-completion
+fzf
